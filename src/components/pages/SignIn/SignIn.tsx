@@ -1,5 +1,6 @@
 import { FC } from "react";
-import { Flex, Input, Button, FormLabel, FormControl, Stack } from "@chakra-ui/react";
+import { Flex, Button, Stack } from "@chakra-ui/react";
+import Input from 'components/Form/Input';
 
 const SignIn: FC = () => {
   return (
@@ -14,37 +15,8 @@ const SignIn: FC = () => {
         borderRadius="8"
       >
         <Stack spacing="4">
-          <FormControl>
-            <FormLabel htmlFor="email">E-mail</FormLabel>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              focusBorderColor="pink.500"
-              bg="gray.900"
-              variant="filled"
-              _hover={{
-                bg: "gray.900",
-              }}
-              size="lg"
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel htmlFor="email">Senha</FormLabel>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              focusBorderColor="pink.500"
-              bg="gray.900"
-              variant="filled"
-              _hover={{
-                bg: "gray.900",
-              }}
-              size="lg"
-            />
-          </FormControl>
+          <Input name="email" type="email" label="E-mail" />
+          <Input name="email" type="password" label="Password" />
         </Stack>
 
         <Button type="submit" mt="6" colorScheme="pink" size="lg">
