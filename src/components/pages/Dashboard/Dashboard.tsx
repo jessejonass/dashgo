@@ -1,9 +1,17 @@
-import Header from 'components/Header';
-import { FC } from 'react';
+import { FC } from "react";
+import { Flex } from "@chakra-ui/react";
+import Header from "components/Header";
+import Sidebar from "components/Sidebar";
 
 const Dashboard: FC = () => {
   return (
-    <Header />
+    <Flex direction="column" h="100vh">
+      <Header />
+
+      <Flex w="100%" my="6" maxW="1480" mx="auto" px="6">
+        <Sidebar />
+      </Flex>
+    </Flex>
   );
 };
 
