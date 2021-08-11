@@ -1,54 +1,27 @@
 import { FC } from "react";
-import { Box, Stack, Text, Link, Icon } from "@chakra-ui/react";
-import { RiContactsLine, RiDashboardLine, RiGitMergeLine, RiInputMethodLine } from "react-icons/ri";
+import { Box, Stack } from "@chakra-ui/react";
+import {
+  RiContactsLine,
+  RiDashboardLine,
+  RiGitMergeLine,
+  RiInputMethodLine,
+} from "react-icons/ri";
+import Section from "./components/Section";
+import Link from "./components/Link";
 
 const Sidebar: FC = () => {
   return (
     <Box as="aside" w="64" mr="8">
       <Stack spacing="12" align="flex-start">
-        <Box>
-          <Text fontWeight="bold" color="gray.400" fontSize="small">
-            Geral
-          </Text>
+        <Section title="Geral">
+          <Link icon={RiDashboardLine}>Dashboard</Link>
+          <Link icon={RiContactsLine}>Usuários</Link>
+        </Section>
 
-          <Stack spacing="4" mt="8" align="stretch">
-            <Link display="flex" align="center" py="1">
-              <Icon as={RiDashboardLine} fontSize="20" />
-              <Text ml="4" fontWeight="medium">
-                Dashboard
-              </Text>
-            </Link>
-
-            <Link display="flex" align="center" py="1">
-              <Icon as={RiContactsLine} fontSize="20" />
-              <Text ml="4" fontWeight="medium">
-                Usuários
-              </Text>
-            </Link>
-          </Stack>
-        </Box>
-
-        <Box>
-          <Text fontWeight="bold" color="gray.400" fontSize="small">
-            Automação
-          </Text>
-
-          <Stack spacing="4" mt="8" align="stretch">
-            <Link display="flex" align="center" py="1">
-              <Icon as={RiInputMethodLine} fontSize="20" />
-              <Text ml="4" fontWeight="medium">
-                Formulários
-              </Text>
-            </Link>
-
-            <Link display="flex" align="center" py="1">
-              <Icon as={RiGitMergeLine} fontSize="20" />
-              <Text ml="4" fontWeight="medium">
-                Automação
-              </Text>
-            </Link>
-          </Stack>
-        </Box>
+        <Section title="Automação">
+          <Link icon={RiInputMethodLine}>Formulários</Link>
+          <Link icon={RiGitMergeLine}>Automação</Link>
+        </Section>
       </Stack>
     </Box>
   );
