@@ -21,7 +21,7 @@ const SidebarDrawerProvider: FC<SidebarDrawerProviderProps> = ({
   // close modal when change router
   useEffect(() => {
     disclosure.onClose();
-  }, [router.asPath, disclosure]);
+  }, [router.asPath]); // eslint-disable-line
 
   return (
     <SidebarDrawerContext.Provider value={disclosure}>
