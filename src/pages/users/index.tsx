@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import UserListPage from 'components/pages/Users/UserList';
+import ListPage from 'components/pages/Users/List';
 
-const UserList: FC = () => {
-  return <UserListPage />
+const List: FC = () => {
+  return <ListPage />
 };
 
-export default UserList;
+export default List;
