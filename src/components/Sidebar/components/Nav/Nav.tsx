@@ -13,13 +13,13 @@ const Nav: FC = () => {
   return (
     <Stack spacing="12" align="flex-start">
       <Section title="Geral">
-        <Link icon={RiDashboardLine}>Dashboard</Link>
-        <Link icon={RiContactsLine}>Usuários</Link>
+        <Link icon={RiDashboardLine} href="/dashboard">Dashboard</Link>
+        <Link icon={RiContactsLine} href="/users">Usuários</Link>
       </Section>
 
       <Section title="Automação">
-        <Link icon={RiInputMethodLine}>Formulários</Link>
-        <Link icon={RiGitMergeLine}>Automação</Link>
+        <Link icon={RiInputMethodLine} href="/forms">Formulários</Link>
+        <Link icon={RiGitMergeLine} href="/automation">Automação</Link>
       </Section>
     </Stack>
   );

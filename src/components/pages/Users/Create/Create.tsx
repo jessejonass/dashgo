@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Link from "next/link";
 import {
   Box,
   Button,
@@ -46,7 +47,10 @@ const Create: FC = () => {
 
           <Flex mt="8" justify="flex-end">
             <HStack spacing="4">
-              <Button colorScheme="whiteAlpha">Cancelar</Button>
+              <Link href="/users" passHref>
+                <Button as="a" colorScheme="whiteAlpha">Cancelar</Button>
+              </Link>
+
               <Button colorScheme="pink">Salvar</Button>
             </HStack>
           </Flex>
