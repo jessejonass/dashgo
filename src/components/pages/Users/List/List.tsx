@@ -19,7 +19,7 @@ import Sidebar from "components/Sidebar";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import Pagination from "components/Pagination";
 
-const UsersList: FC = () => {
+const List: FC = () => {
   return (
     <Box>
       <Header />
@@ -95,4 +95,4 @@ const UsersList: FC = () => {
   );
 };
 
-export default UsersList;
+export default List;
