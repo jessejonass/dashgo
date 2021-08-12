@@ -1,16 +1,20 @@
-import { FC } from "react";
+import { forwardRef, ForwardRefRenderFunction } from "react";
 import {
   FormControl,
+  FormErrorMessage,
   FormLabel,
-  Input as InputElement,
+  Input as InputChakra,
 } from "@chakra-ui/react";
 import { InputProps } from "./types";
 
-const Input: FC<InputProps> = ({ name, label, ...rest }) => {
+const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  { name, label, error = null, ...rest },
+  ref
+) => {
   return (
-    <FormControl>
+    <FormControl isInvalid={!!error}>
       {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-      <InputElement
+      <InputChakra
         id={name}
         name={name}
         focusBorderColor="pink.500"
@@ -20,10 +24,14 @@ const Input: FC<InputProps> = ({ name, label, ...rest }) => {
           bg: "gray.900",
         }}
         size="lg"
+        ref={ref}
         {...rest}
       />
+
+      {!!error && <FormErrorMessage>{error.message}</FormErrorMessage>}
     </FormControl>
   );
 };
 
+const Input = forwardRef(InputBase);
 export default Input;
