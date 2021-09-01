@@ -28,7 +28,7 @@ export function makeServer() {
     },
 
     seeds(server) {
-      server.createList("user", 200); // nome do factory e número de dados
+      server.createList("user", 10); // nome do factory e número de dados
     },
 
     // rotas que vou ter dentro do mirage
