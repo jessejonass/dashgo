@@ -1,9 +1,10 @@
 import { AppProps } from "next/app";
-import { ChakraProvider } from "@chakra-ui/react";
-import { makeServer } from "services/mirage";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { theme } from "../styles/theme";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { ChakraProvider } from "@chakra-ui/react";
 import SidebarDrawerProvider from "contexts/SidebarDrawerContext";
+import { makeServer } from "services/mirage";
+import { theme } from "../styles/theme";
 
 // ambiente development é setado pelo next automaticamente
 if (process.env.NODE_ENV === "development") {
@@ -21,6 +22,8 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </SidebarDrawerProvider>
       </ChakraProvider>
+
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
