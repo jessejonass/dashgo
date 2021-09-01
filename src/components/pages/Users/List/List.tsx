@@ -1,6 +1,7 @@
 import { FC } from "react";
-import { useQuery } from "react-query";
+import { useUsers } from "services/hooks/useUsers";
 import Link from "next/link";
+
 import {
   Box,
   Button,
@@ -18,19 +19,14 @@ import {
   Tr,
   useBreakpointValue,
 } from "@chakra-ui/react";
+
 import Header from "components/Header";
 import Sidebar from "components/Sidebar";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import Pagination from "components/Pagination";
 
 const List: FC = () => {
-  const { data, isLoading, error } = useQuery("users", async () => {
-    const response = await fetch("http://localhost:3000/api/users");
-    const data = await response.json();
-    return data;
-  });
-
-  console.log(data);
+  const { data, isLoading, isFetching, error } = useUsers();
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -46,8 +42,11 @@ const List: FC = () => {
 
         <Box flex="1" borderRadius="8" bg="gray.800" p="8">
           <Flex mb="8" justify="space-between" align="center">
-            <Heading size="large" fontWeight="normal">
-              Lista de usuários
+            <Heading size="lg" fontWeight="normal">
+              Usuários
+              {!isLoading && isFetching && (
+                <Spinner size="sm" color="gray.500" ml="2" />
+              )}
             </Heading>
 
             <Link href="/users/create" passHref>
@@ -87,33 +86,35 @@ const List: FC = () => {
                 </Thead>
 
                 <Tbody>
-                  <Tr>
-                    <Td px={["4", "4", "6"]}>
-                      <Checkbox colorScheme="pink" />
-                    </Td>
+                  {data.map((user) => (
+                    <Tr key={user.id}>
+                      <Td px={["4", "4", "6"]}>
+                        <Checkbox colorScheme="pink" />
+                      </Td>
 
-                    <Td>
-                      <Box>
-                        <Text fontWeight="bold">Jessé Jonas</Text>
-                        <Text fontSize="small" color="gray.300">
-                          jessejonas13@gmail.com
-                        </Text>
-                      </Box>
-                    </Td>
+                      <Td>
+                        <Box>
+                          <Text fontWeight="bold">{user.name}</Text>
+                          <Text fontSize="small" color="gray.300">
+                            {user.email}
+                          </Text>
+                        </Box>
+                      </Td>
 
-                    {isWideVersion && <Td>11 de Agosto de 2021</Td>}
+                      {isWideVersion && <Td>{user.createdAt}</Td>}
 
-                    <Td>
-                      <Button
-                        size="sm"
-                        fontSize="sm"
-                        colorScheme="whiteAlpha"
-                        leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                      >
-                        {isWideVersion ? "Editar usuário" : "Editar"}
-                      </Button>
-                    </Td>
-                  </Tr>
+                      <Td>
+                        <Button
+                          size="sm"
+                          fontSize="sm"
+                          colorScheme="whiteAlpha"
+                          leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+                        >
+                          {isWideVersion ? "Editar usuário" : "Editar"}
+                        </Button>
+                      </Td>
+                    </Tr>
+                  ))}
                 </Tbody>
               </Table>
 
