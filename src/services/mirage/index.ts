@@ -1,4 +1,5 @@
-import { createServer, Model } from "miragejs";
+import { createServer, Factory, Model } from "miragejs";
+import faker from "faker";
 
 import { User } from "./types";
 
@@ -8,6 +9,26 @@ export function makeServer() {
     models: {
       // partial -> tem os campos do User mas pode ser que sejam não todos
       user: Model.extend<Partial<User>>({}),
+    },
+
+    // forma de gerar dados em massa
+    factories: {
+      user: Factory.extend({
+        name(i: number) {
+          return `User ${i + 1}`;
+        },
+        email() {
+          return faker.internet.email().toLocaleLowerCase();
+        },
+        // factory entende que camelCase é pascal_case
+        createdAt() {
+          return faker.date.recent(10, new Date());
+        },
+      }),
+    },
+
+    seeds(server) {
+      server.createList("user", 200); // nome do factory e número de dados
     },
 
     // rotas que vou ter dentro do mirage
