@@ -5,33 +5,21 @@ import Link from "next/link";
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
   Heading,
   Icon,
   Spinner,
-  Table,
-  Tbody,
-  Td,
   Text,
-  Th,
-  Thead,
-  Tr,
-  useBreakpointValue,
 } from "@chakra-ui/react";
+import { RiAddLine } from "react-icons/ri";
 
 import Header from "components/Header";
 import Sidebar from "components/Sidebar";
-import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import Pagination from "components/Pagination";
+import ListUsersTable from "./ListUsersTable";
 
 const List: FC = () => {
   const { data, isLoading, isFetching, error } = useUsers();
-
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    lg: true,
-  });
 
   return (
     <Box>
@@ -68,56 +56,11 @@ const List: FC = () => {
             </Flex>
           ) : error ? (
             <Flex justify="center">
-              <Text>Falaha ao obter dados dos usuários</Text>
+              <Text>Falha ao obter dados dos usuários</Text>
             </Flex>
           ) : (
             <>
-              <Table colorScheme="whiteAlpha">
-                <Thead>
-                  <Tr>
-                    <Th px={["4", "4", "6"]} color="gray.300" width="8">
-                      <Checkbox colorScheme="pink" />
-                    </Th>
-
-                    <Th>Usuário</Th>
-                    {isWideVersion && <Th>Data de cadastro</Th>}
-                    <Th width="8" />
-                  </Tr>
-                </Thead>
-
-                <Tbody>
-                  {data.map((user) => (
-                    <Tr key={user.id}>
-                      <Td px={["4", "4", "6"]}>
-                        <Checkbox colorScheme="pink" />
-                      </Td>
-
-                      <Td>
-                        <Box>
-                          <Text fontWeight="bold">{user.name}</Text>
-                          <Text fontSize="small" color="gray.300">
-                            {user.email}
-                          </Text>
-                        </Box>
-                      </Td>
-
-                      {isWideVersion && <Td>{user.createdAt}</Td>}
-
-                      <Td>
-                        <Button
-                          size="sm"
-                          fontSize="sm"
-                          colorScheme="whiteAlpha"
-                          leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-                        >
-                          {isWideVersion ? "Editar usuário" : "Editar"}
-                        </Button>
-                      </Td>
-                    </Tr>
-                  ))}
-                </Tbody>
-              </Table>
-
+              <ListUsersTable users={data} />
               <Pagination />
             </>
           )}
