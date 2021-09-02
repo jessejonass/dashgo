@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/react";
 
 import { ItemProps } from "./types";
 
-const Item: FC<ItemProps> = ({ isCurrent = false, number }) => {
+const Item: FC<ItemProps> = ({ isCurrent = false, number, onPageChange }) => {
   if (isCurrent) {
     return (
       <Button
@@ -32,6 +32,7 @@ const Item: FC<ItemProps> = ({ isCurrent = false, number }) => {
       _hover={{
         bg: "gray.500",
       }}
+      onClick={() => onPageChange(number)}
     >
       {number}
     </Button>

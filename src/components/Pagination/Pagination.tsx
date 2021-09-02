@@ -60,26 +60,38 @@ const Pagination: FC<PaginationProps> = ({
         {/* Primeira página */}
         {currentPage > 1 + siblingsCount && (
           <>
-            <Item number={1} />
-            {currentPage > 2 + siblingsCount && <Text color="gray.300" width="8" textAlign="center">...</Text>}
+            <Item onPageChange={onPageChange} number={1} />
+            {currentPage > 2 + siblingsCount && (
+              <Text color="gray.300" width="8" textAlign="center">
+                ...
+              </Text>
+            )}
           </>
         )}
 
         {/* Páginas anteriores */}
         {previousPages.length > 0 &&
-          previousPages.map((page) => <Item key={page} number={page} />)}
+          previousPages.map((page) => (
+            <Item onPageChange={onPageChange} key={page} number={page} />
+          ))}
 
-        <Item number={currentPage} isCurrent />
+        <Item onPageChange={onPageChange} number={currentPage} isCurrent />
 
         {/* Páginas posteriores */}
         {nextPages.length > 0 &&
-          previousPages.map((page) => <Item key={page} number={page} />)}
+          nextPages.map((page) => (
+            <Item onPageChange={onPageChange} key={page} number={page} />
+          ))}
 
         {/* última página */}
         {currentPage + siblingsCount < lastPage && (
           <>
-            {currentPage + 1 + siblingsCount < lastPage && <Text color="gray.300" width="8" textAlign="center">...</Text>}
-            <Item number={lastPage} />
+            {currentPage + 1 + siblingsCount < lastPage && (
+              <Text color="gray.300" width="8" textAlign="center">
+                ...
+              </Text>
+            )}
+            <Item onPageChange={onPageChange} number={lastPage} />
           </>
         )}
       </Stack>

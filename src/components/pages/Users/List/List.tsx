@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useUsers } from "services/hooks/useUsers";
 import Link from "next/link";
 
@@ -19,7 +19,9 @@ import Pagination from "components/Pagination";
 import ListUsersTable from "./ListUsersTable";
 
 const List: FC = () => {
-  const { data, isLoading, isFetching, error } = useUsers();
+  const [page, setPage] = useState(1);
+
+  const { data, isLoading, isFetching, error } = useUsers(page);
 
   return (
     <Box>
@@ -60,11 +62,11 @@ const List: FC = () => {
             </Flex>
           ) : (
             <>
-              <ListUsersTable users={data} />
+              <ListUsersTable users={data.users} />
               <Pagination
-                totalCountRegisters={200}
-                currentPage={5}
-                onPageChange={() => {}}
+                totalCountRegisters={data.totalCount}
+                currentPage={page}
+                onPageChange={setPage}
               />
             </>
           )}
