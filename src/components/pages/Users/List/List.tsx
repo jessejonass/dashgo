@@ -61,7 +61,11 @@ const List: FC = () => {
           ) : (
             <>
               <ListUsersTable users={data} />
-              <Pagination />
+              <Pagination
+                totalCountRegisters={200}
+                currentPage={5}
+                onPageChange={() => {}}
+              />
             </>
           )}
         </Box>
