@@ -53,6 +53,8 @@ export function makeServer() {
 
         return new Response(200, { "x-total-count": String(total) }, { users });
       });
+
+      this.get("/users/:id");
       this.post("/users");
 
       // as api routes do next (pages/api) também utilizam o /api

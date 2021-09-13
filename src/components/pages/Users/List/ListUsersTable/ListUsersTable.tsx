@@ -12,16 +12,33 @@ import {
   Thead,
   Tr,
   useBreakpointValue,
+  Link,
 } from "@chakra-ui/react";
 import { RiPencilLine } from "react-icons/ri";
 
 import { ListUsersTableProps } from "./types";
+import { queryClient } from "services/queryClient";
+import { api } from "services/api";
 
 const ListUsersTable: FC<ListUsersTableProps> = ({ users }) => {
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
+
+  async function handlePrefetchUser(userId: number) {
+    await queryClient.prefetchQuery(
+      ["user", userId],
+      async () => {
+        const response = await api.get(`users/${userId}`);
+
+        return response.data;
+      },
+      {
+        staleTime: 1000 * 60 * 10 // 10 minutos
+      }
+    );
+  }
 
   return (
     <Table colorScheme="whiteAlpha">
@@ -46,7 +63,13 @@ const ListUsersTable: FC<ListUsersTableProps> = ({ users }) => {
 
             <Td>
               <Box>
-                <Text fontWeight="bold">{user.name}</Text>
+                <Link
+                  color="purple.400"
+                  onMouseEnter={() => handlePrefetchUser(Number(user.id))}
+                >
+                  <Text fontWeight="bold">{user.name}</Text>
+                </Link>
+
                 <Text fontSize="small" color="gray.300">
                   {user.email}
                 </Text>

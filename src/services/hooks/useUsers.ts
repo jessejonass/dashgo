@@ -41,6 +41,6 @@ export async function getUsers(page: number): Promise<GetUsersResponse> {
 // hook que conecta a função acima ao react-query
 export function useUsers(page: number) {
   return useQuery(["users", page], () => getUsers(page), {
-    staleTime: 1000 * 5, // 5seconds
+    staleTime: 1000 * 60 * 10, //  10 min
   });
 }
