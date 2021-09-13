@@ -20,7 +20,6 @@ import ListUsersTable from "./ListUsersTable";
 
 const List: FC = () => {
   const [page, setPage] = useState(1);
-
   const { data, isLoading, isFetching, error } = useUsers(page);
 
   return (
