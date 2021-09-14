@@ -26,7 +26,7 @@ const ListUsersTable: FC<ListUsersTableProps> = ({ users }) => {
     lg: true,
   });
 
-  async function handlePrefetchUser(userId: number) {
+  async function handlePrefetchUser(userId: string) {
     await queryClient.prefetchQuery(
       ["user", userId],
       async () => {
@@ -65,7 +65,7 @@ const ListUsersTable: FC<ListUsersTableProps> = ({ users }) => {
               <Box>
                 <Link
                   color="purple.400"
-                  onMouseEnter={() => handlePrefetchUser(Number(user.id))}
+                  onMouseEnter={() => handlePrefetchUser(user.id)}
                 >
                   <Text fontWeight="bold">{user.name}</Text>
                 </Link>

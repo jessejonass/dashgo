@@ -1,10 +1,20 @@
-import { createServer, Factory, Model, Response } from "miragejs";
+import {
+  createServer,
+  Factory,
+  Model,
+  Response,
+  ActiveModelSerializer,
+} from "miragejs";
 import faker from "faker";
 
 import { User } from "./types";
 
 export function makeServer() {
   const server = createServer({
+    serializers: {
+      application: ActiveModelSerializer,
+    },
+
     // dados | models | tipos de dados que serão armazenados no mock db
     models: {
       // partial -> tem os campos do User mas pode ser que sejam não todos
